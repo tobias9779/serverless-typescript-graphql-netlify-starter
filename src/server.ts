@@ -1,20 +1,10 @@
+import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer as ApolloServerLambda } from "apollo-server-lambda";
 
-import { ApolloServer, gql } from 'apollo-server'
-import { ApolloServer as ApolloServerLambda } from 'apollo-server-lambda'
+import typeDefs from "./schema";
+import resolvers from "./resolvers";
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "Hi! Love from @stemmlerjs 🤠."
-  }
-};
-
-function createLambdaServer () {
+function createLambdaServer() {
   return new ApolloServerLambda({
     typeDefs,
     resolvers,
@@ -23,7 +13,7 @@ function createLambdaServer () {
   });
 }
 
-function createLocalServer () {
+function createLocalServer() {
   return new ApolloServer({
     typeDefs,
     resolvers,
@@ -32,4 +22,4 @@ function createLocalServer () {
   });
 }
 
-export { createLambdaServer, createLocalServer }
+export { createLambdaServer, createLocalServer };
